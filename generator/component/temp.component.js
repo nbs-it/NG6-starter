@@ -9,6 +9,6 @@ let <%= name %>Component = {
   controllerAs: 'vm'
 };
 
-controller.$inject = [''];
+// controller.$inject = [''];
 
 export default <%= name %>Component;
