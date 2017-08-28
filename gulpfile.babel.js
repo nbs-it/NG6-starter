@@ -21,34 +21,43 @@ let root = 'client';
 
 // helper method for resolving paths
 let resolveToApp = (glob = '') => {
-  return path.join(root, 'app', glob); // app/{glob}
+  return path.join(root, glob); // app/{glob}
 };
 
 let resolveToComponents = (glob = '') => {
-  return path.join(root, 'app/components', glob); // app/components/{glob}
+  return path.join(root, '/app/components', glob); // app/components/{glob}
 };
-
+let resolveToServices = (glob = '') => {
+  return path.join(root, '/app/services', glob); // app/components/{glob}
+};
+let resolveToDirective = (glob = '') => {
+  return path.join(root, '/app/directives', glob); // app/components/{glob}
+};
 // map of all paths
-let paths = {
-  js: resolveToComponents('**/*!(.spec.js).js'), // exclude spec files
-  scss: resolveToApp('**/*.scss'), // stylesheets
-  html: [
-    resolveToApp('**/*.html'),
-    path.join(root, 'index.html')
-  ],
-  entry: [
-    'babel-polyfill',
-    path.join(__dirname, root, 'app/app.js')
-  ],
-  output: root,
-  blankTemplates: path.join(__dirname, 'generator', 'component/**/*.**'),
-  dest: path.join(__dirname, 'dist')
-};
+function paths () {
+  return {
+    js: resolveToComponents('**/*!(.spec.js).js'), // exclude spec files
+    scss: resolveToApp('**/*.scss'), // stylesheets
+    html: [
+      resolveToApp('**/*.html'),
+      path.join(root, '/index.html')
+    ],
+    entry: [
+      'babel-polyfill',
+      path.join(__dirname, root, '/app/app.js')
+    ],
+    output: root,
+    blankTemplatesCmp: path.join(__dirname, 'generator', 'component/**/*.**'),
+    blankTemplatesService: path.join(__dirname, 'generator', 'service/**/*.**'),
+    blankTemplatesDirective: path.join(__dirname, 'generator', 'directive/**/*.**'),
+    dest: path.join(__dirname, 'dist')
+  };
+}
 
 // use webpack.config.js to build modules
 gulp.task('webpack', ['clean'], (cb) => {
   const config = require('./webpack.dist.config');
-  config.entry.app = paths.entry;
+  config.entry.app = paths().entry;
 
   webpack(config, (err, stats) => {
     if (err) {
@@ -66,20 +75,23 @@ gulp.task('webpack', ['clean'], (cb) => {
 });
 
 gulp.task('serve', () => {
-  const config = require('./webpack.dev.config');
+  const config = require('./webpack.dev.config')();
   config.entry.app = [
     // this modules required to make HRM working
     // it responsible for all this webpack magic
     'webpack-hot-middleware/client?reload=true'
     // application entry point
-  ].concat(paths.entry);
-
+  ].concat(paths().entry);
   var compiler = webpack(config);
 
   serve({
     port: process.env.PORT || 3000,
     open: false,
-    server: { baseDir: root },
+    server: { baseDir: root + '/' },
+    serveStatic: [{
+      route: '/assets',
+      dir: './app/assets'
+    }],
     middleware: [
       historyApiFallback(),
       webpackDevMiddleware(compiler, {
@@ -102,12 +114,55 @@ gulp.task('component', () => {
     return val.charAt(0).toUpperCase() + val.slice(1);
   };
   const name = yargs.argv.name;
+  const moduleName = yargs.argv.module || name;
   const parentPath = yargs.argv.parent || '';
   const destPath = path.join(resolveToComponents(), parentPath, name);
 
-  return gulp.src(paths.blankTemplates)
+  return gulp.src(paths().blankTemplatesCmp)
     .pipe(template({
       name: name,
+      moduleName: moduleName,
+      upCaseName: cap(name)
+    }))
+    .pipe(rename((path) => {
+      path.basename = path.basename.replace('temp', name);
+    }))
+    .pipe(gulp.dest(destPath));
+});
+
+gulp.task('service', () => {
+  const cap = (val) => {
+    return val.charAt(0).toUpperCase() + val.slice(1);
+  };
+  const name = yargs.argv.name;
+  const moduleName = yargs.argv.module || name;
+  const parentPath = yargs.argv.parent || '';
+  const destPath = path.join(resolveToServices(), parentPath, name);
+  return gulp.src(paths().blankTemplatesService)
+    .pipe(template({
+      name: name,
+      moduleName: moduleName,
+      upCaseName: cap(name)
+    }))
+    .pipe(rename((path) => {
+      path.basename = path.basename.replace('temp', name);
+    }))
+    .pipe(gulp.dest(destPath));
+});
+
+gulp.task('directive', () => {
+  const cap = (val) => {
+    return val.charAt(0).toUpperCase() + val.slice(1);
+  };
+  const name = yargs.argv.name;
+  const moduleName = yargs.argv.module || name;
+  const parentPath = yargs.argv.parent || '';
+  const destPath = path.join(resolveToDirective(), parentPath, name);
+  console.log(moduleName);
+  return gulp.src(paths().blankTemplatesDirective)
+    .pipe(template({
+      name: name,
+      moduleName: moduleName,
       upCaseName: cap(name)
     }))
     .pipe(rename((path) => {
@@ -117,7 +172,7 @@ gulp.task('component', () => {
 });
 
 gulp.task('clean', (cb) => {
-  del([paths.dest]).then(function (paths) {
+  del([paths().dest]).then(function (paths) {
     gutil.log('[clean]', paths);
     cb();
   });

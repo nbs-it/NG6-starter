@@ -5,7 +5,10 @@ import './<%= name %>.scss';
 let <%= name %>Component = {
   bindings: { },
   template,
-    controller
+  controller,
+  controllerAs: 'vm'
 };
+
+controller.$inject = [''];
 
 export default <%= name %>Component;
