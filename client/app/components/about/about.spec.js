@@ -1,4 +1,4 @@
-import AboutModule from './about'
+import AboutModule from './about';
 
 describe('About', () => {
   let $rootScope, $state, $location, $componentController, $compile;
@@ -49,6 +49,5 @@ describe('About', () => {
     it('has name in template', () => {
       expect(template.find('h1').html()).to.eq('about');
     });
-
   });
 });

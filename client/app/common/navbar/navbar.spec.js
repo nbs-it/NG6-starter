@@ -1,4 +1,4 @@
-import NavbarModule from './navbar'
+import NavbarModule from './navbar';
 
 describe('Navbar', () => {
   let $rootScope, $state, $location, $componentController, $compile;
@@ -44,6 +44,5 @@ describe('Navbar', () => {
     it('has name in template', () => {
       expect(template.find('h1').find('a').html()).to.eq('navbar');
     });
-
   });
 });

@@ -7,6 +7,6 @@ let componentModule = angular.module('app.components', [
   About
 ])
 
-.name;
+  .name;
 
 export default componentModule;

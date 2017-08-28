@@ -6,8 +6,8 @@ let navbarModule = angular.module('navbar', [
   uiRouter
 ])
 
-.component('navbar', navbarComponent)
-  
-.name;
+  .component('navbar', navbarComponent)
+
+  .name;
 
 export default navbarModule;

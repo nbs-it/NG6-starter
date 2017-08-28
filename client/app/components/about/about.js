@@ -6,17 +6,17 @@ let aboutModule = angular.module('about', [
   uiRouter
 ])
 
-.config(($stateProvider) => {
-  "ngInject";
-  $stateProvider
-    .state('about', {
-      url: '/about',
-      component: 'about'
-    });
-})
+  .config(($stateProvider) => {
+    'ngInject';
+    $stateProvider
+      .state('about', {
+        url: '/about',
+        component: 'about'
+      });
+  })
 
-.component('about', aboutComponent)
-  
-.name;
+  .component('about', aboutComponent)
+
+  .name;
 
 export default aboutModule;
