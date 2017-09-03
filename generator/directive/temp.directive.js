@@ -18,6 +18,6 @@ function <%= name %>Directive () {
   };
 }
 
-controller.$inject = [''];
+// controller.$inject = [''];
 
 export default <%= name %>Module;

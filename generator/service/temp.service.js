@@ -5,7 +5,7 @@ class <%= name %>Service {
   }
 }
 
-<%= name %>Service.$inject = [''];
+// <%= name %>Service.$inject = [''];
 
 let <%= name %>Module = angular.module('<%=moduleName%>'<%= modu = '' %><%= noModu = '' %><%= name == moduleName ? ', []' : '' %>)
 
