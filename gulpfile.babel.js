@@ -109,64 +109,65 @@ gulp.task('serve', () => {
 
 gulp.task('watch', ['serve']);
 
+const cap = (val) => {
+  return val.charAt(0).toUpperCase() + val.slice(1);
+};
+const kebab = (val) => {
+  return val.replace(/([A-Z])/g, function (char) { return '-' + char.toLowerCase(); });
+};
+
 gulp.task('component', () => {
-  const cap = (val) => {
-    return val.charAt(0).toUpperCase() + val.slice(1);
-  };
   const name = yargs.argv.name;
   const moduleName = yargs.argv.module || name;
   const parentPath = yargs.argv.parent || '';
-  const destPath = path.join(resolveToComponents(), parentPath, name);
+  const destPath = path.join(resolveToComponents(), parentPath, kebab(name));
 
   return gulp.src(paths().blankTemplatesCmp)
     .pipe(template({
       name: name,
       moduleName: moduleName,
-      upCaseName: cap(name)
+      upCaseName: cap(name),
+      kebabCaseName: kebab(name)
     }))
     .pipe(rename((path) => {
-      path.basename = path.basename.replace('temp', name);
+      path.basename = path.basename.replace('temp', kebab(name));
     }))
     .pipe(gulp.dest(destPath));
 });
 
 gulp.task('service', () => {
-  const cap = (val) => {
-    return val.charAt(0).toUpperCase() + val.slice(1);
-  };
   const name = yargs.argv.name;
   const moduleName = yargs.argv.module || name;
   const parentPath = yargs.argv.parent || '';
-  const destPath = path.join(resolveToServices(), parentPath, name);
+  const destPath = path.join(resolveToServices(), parentPath, kebab(name));
   return gulp.src(paths().blankTemplatesService)
     .pipe(template({
       name: name,
       moduleName: moduleName,
-      upCaseName: cap(name)
+      upCaseName: cap(name),
+      kebabCaseName: kebab(name)
     }))
     .pipe(rename((path) => {
-      path.basename = path.basename.replace('temp', name);
+      path.basename = path.basename.replace('temp', kebab(name));
     }))
     .pipe(gulp.dest(destPath));
 });
 
 gulp.task('directive', () => {
-  const cap = (val) => {
-    return val.charAt(0).toUpperCase() + val.slice(1);
-  };
   const name = yargs.argv.name;
   const moduleName = yargs.argv.module || name;
   const parentPath = yargs.argv.parent || '';
-  const destPath = path.join(resolveToDirective(), parentPath, name);
+  const destPath = path.join(resolveToDirective(), parentPath, kebab(name));
   console.log(moduleName);
   return gulp.src(paths().blankTemplatesDirective)
     .pipe(template({
       name: name,
       moduleName: moduleName,
-      upCaseName: cap(name)
+      upCaseName: cap(name),
+      kebabCaseName: kebab(name)
     }))
     .pipe(rename((path) => {
-      path.basename = path.basename.replace('temp', name);
+      path.basename = path.basename.replace('temp', kebab(name));
     }))
     .pipe(gulp.dest(destPath));
 });

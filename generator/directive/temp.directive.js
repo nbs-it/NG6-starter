@@ -1,10 +1,9 @@
 import angular from 'angular';
-import template from './<%= name %>.html';
-import controller from './<%= name %>.controller';
-import './<%= name %>.scss';
+import template from './<%= kebabCaseName %>.html';
+import controller from './<%= kebabCaseName %>.controller';
+import './<%= kebabCaseName %>.scss';
 
 let <%= name %>Module = angular.module('<%=moduleName%>'<%= modu = '' %><%= noModu = '' %><%= name == moduleName ? ', []' : '' %>)
-
   .directive('<%=name%>', <%= name %>Directive)
   .name;
 

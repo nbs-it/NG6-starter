@@ -1,7 +1,7 @@
-import <%= upCaseName %>Module from './<%= name %>';
-import <%= upCaseName %>Controller from './<%= name %>.controller';
-import <%= upCaseName %>Component from './<%= name %>.component';
-import <%= upCaseName %>Template from './<%= name %>.html';
+import <%= upCaseName %>Module from './<%= kebabCaseName %>';
+import <%= upCaseName %>Controller from './<%= kebabCaseName %>.controller';
+import <%= upCaseName %>Component from './<%= kebabCaseName %>.component';
+import <%= upCaseName %>Template from './<%= kebabCaseName %>.html';
 
 describe('<%= upCaseName %>', () => {
   let $rootScope, makeController;
