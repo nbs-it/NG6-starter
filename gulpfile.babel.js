@@ -120,7 +120,7 @@ gulp.task('component', () => {
   const name = yargs.argv.name;
   const moduleName = yargs.argv.module || name;
   const parentPath = yargs.argv.parent || '';
-  const destPath = path.join(resolveToComponents(), parentPath, kebab(name));
+  const destPath = path.join(resolveToComponents(), kebab(parentPath), kebab(name));
 
   return gulp.src(paths().blankTemplatesCmp)
     .pipe(template({
@@ -139,7 +139,8 @@ gulp.task('service', () => {
   const name = yargs.argv.name;
   const moduleName = yargs.argv.module || name;
   const parentPath = yargs.argv.parent || '';
-  const destPath = path.join(resolveToServices(), parentPath, kebab(name));
+  const destPath = path.join(resolveToServices(), kebab(parentPath), kebab(name));
+
   return gulp.src(paths().blankTemplatesService)
     .pipe(template({
       name: name,
@@ -157,8 +158,8 @@ gulp.task('directive', () => {
   const name = yargs.argv.name;
   const moduleName = yargs.argv.module || name;
   const parentPath = yargs.argv.parent || '';
-  const destPath = path.join(resolveToDirective(), parentPath, kebab(name));
-  console.log(moduleName);
+  const destPath = path.join(resolveToDirective(), kebab(parentPath), kebab(name));
+
   return gulp.src(paths().blankTemplatesDirective)
     .pipe(template({
       name: name,
