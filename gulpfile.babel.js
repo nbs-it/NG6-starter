@@ -88,10 +88,16 @@ gulp.task('serve', () => {
     port: process.env.PORT || 3000,
     open: false,
     server: { baseDir: root + '/' },
-    serveStatic: [{
-      route: '/assets',
-      dir: './app/assets'
-    }],
+    serveStatic: [
+      {
+        route: '/assets',
+        dir: './client/assets'
+      },
+      {
+        route: '/vendors',
+        dir: './client/vendors'
+      }
+    ],
     middleware: [
       historyApiFallback(),
       webpackDevMiddleware(compiler, {
