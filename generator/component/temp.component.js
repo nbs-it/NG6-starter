@@ -3,7 +3,7 @@ import controller from './<%= kebabCaseName %>.controller';
 import './<%= kebabCaseName %>.scss';
 
 let <%= name %>Component = {
-  bindings: { },
+  bindings: {},
   template,
   controller,
   controllerAs: 'vm'

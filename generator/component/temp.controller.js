@@ -1,8 +1,6 @@
-let vm;
-
 class <%= upCaseName %>Controller {
   constructor () {
-    vm = this;
+    let vm = this;
     vm.name = '<%= name %>';
   }
 }
