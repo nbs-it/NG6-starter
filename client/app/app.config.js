@@ -1,4 +1,4 @@
-export default ($locationProvider, $stateProvider, $urlRouterProvider) => {
+export default function ($locationProvider, $stateProvider, $urlRouterProvider) {
   'ngInject';
   // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
   // #how-to-configure-your-server-to-work-with-html5mode
@@ -13,4 +13,4 @@ export default ($locationProvider, $stateProvider, $urlRouterProvider) => {
       component: 'about'
     });
   $urlRouterProvider.otherwise('/');
-};
+}

@@ -1,7 +1,12 @@
-class HeroController {
-  constructor () {
-    this.name = 'hero';
-  }
-}
+export default function () {
+  let vm;
 
-export default HeroController;
+  class HeroController {
+    constructor () {
+      vm = this;
+      vm.name = 'hero';
+    }
+  }
+
+  return new HeroController();
+}

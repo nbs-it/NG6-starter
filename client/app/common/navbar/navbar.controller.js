@@ -1,7 +1,12 @@
-class NavbarController {
-  constructor () {
-    this.name = 'navbar';
-  }
-}
+export default function () {
+  let vm;
 
-export default NavbarController;
+  class NavbarController {
+    constructor () {
+      vm = this;
+      vm.name = 'navbar';
+    }
+  }
+
+  return new NavbarController();
+}

@@ -1,8 +1,12 @@
-class <%= upCaseName %>Controller {
-  constructor () {
-    let vm = this;
-    vm.name = '<%= name %>';
-  }
-}
+export default function () {
+  let vm
 
-export default <%= upCaseName %>Controller;
+  class <%= upCaseName %>Controller {
+    constructor () {
+      vm = this;
+      vm.name = '<%= name %>';
+    }
+  }
+
+  return new <%= upCaseName %>Controller()
+}

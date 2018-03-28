@@ -5,7 +5,8 @@ import './navbar.scss';
 let navbarComponent = {
   bindings: {},
   template,
-  controller
+  controller,
+  controllerAs: 'vm'
 };
 
 export default navbarComponent;

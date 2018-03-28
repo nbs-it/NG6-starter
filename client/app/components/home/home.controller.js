@@ -1,7 +1,12 @@
-class HomeController {
-  constructor () {
-    this.name = 'home';
-  }
-}
+export default function () {
+  let vm;
 
-export default HomeController;
+  class HomeController {
+    constructor () {
+      vm = this;
+      vm.name = 'home';
+    }
+  }
+
+  return new HomeController();
+}

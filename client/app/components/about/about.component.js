@@ -5,7 +5,8 @@ import './about.scss';
 let aboutComponent = {
   bindings: {},
   template,
-  controller
+  controller,
+  controllerAs: 'vm'
 };
 
 export default aboutComponent;

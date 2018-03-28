@@ -1,11 +1,11 @@
 let UserFactory = function () {
   const user = {};
 
-  let getUser = () => {
+  let getUser = function () {
     return user;
   };
 
-  let isSignedIn = () => {
+  let isSignedIn = function () {
     return user.isSignedIn;
   };
 

@@ -1,7 +1,12 @@
-class AboutController {
-  constructor () {
-    this.name = 'about';
-  }
-}
+export default function () {
+  let vm;
 
-export default AboutController;
+  class AboutController {
+    constructor () {
+      vm = this;
+      vm.name = 'about';
+    }
+  }
+
+  return new AboutController();
+}
