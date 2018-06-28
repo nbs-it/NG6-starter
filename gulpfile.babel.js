@@ -88,6 +88,11 @@ gulp.task('serve', () => {
     port: process.env.PORT || 3000,
     open: false,
     server: { baseDir: root + '/' },
+    ghostMode: {
+      clicks: false,
+      forms: false,
+      scroll: false
+    },
     serveStatic: [
       {
         route: '/assets',
