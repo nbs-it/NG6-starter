@@ -1,5 +1,5 @@
 export default function () {
-  let vm
+  let vm;
 
   class <%= upCaseName %>Controller {
     constructor () {
